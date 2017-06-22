@@ -1,39 +1,32 @@
-/*		ELE103: JOGO DOS 15
-
-	Gabriel Rogerio Ferraz Albino	2017010300
-	Rafael Seije Okamoto			2017012234
-	Thais Rezende da Silva			2017009524
-	Thiago Batista de Mira			2017017670
-
-*/
+//		ELE103: JOGO DOS 15
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
 
-//Estrutura para salvar a pontuaÁ„o dos jogadores;
+//Estrutura para salvar a pontua√ß√£o dos jogadores;
 	typedef struct player{
 		char name[50];
 		int moves;
 	}Player;
 
-//ProtÛtipo das FunÁıes:
+//Prot√≥tipo das Fun√ß√µes:
 void newGame();//Cria uma Matriz para jogar;
-int *create(void);//Aloca memÛria para o array que ser· a matriz do jogo e atribui os valores de 0 a 15 ‡ ela;
+int *create(void);//Aloca mem√≥ria para o array que ser√° a matriz do jogo e atribui os valores de 0 a 15 √† ela;
 void random(int *array);//Embaralha os elementos da matriz criada;
-int puzzleBoss(int *array);//Confere se a Matriz tem SoluÁ„o;
-void loadGame();//Carrega uma Matriz j· salva para jogar;
+int puzzleBoss(int *array);//Confere se a Matriz tem Solu√ß√£o;
+void loadGame();//Carrega uma Matriz j√° salva para jogar;
 void game(int *array, int count_move);//Roda o jogo;
-int move(int *array, int x);//Troca de posiÁ„o o 0 com o inteiro escolhido pelo usu·rio na matriz se o movimento for v·lido;
+int move(int *array, int x);//Troca de posi√ß√£o o 0 com o inteiro escolhido pelo usu√°rio na matriz se o movimento for v√°lido;
 void print(int *array);//Imprime a matriz;
 void saveGame (int *array, int count_move);//Salva o jogo para continuar mais tarde;
 void saveScore(int count_move);//Salva o placar do jogador quando ele vence;
-void help(void);//Passa as instruÁıes;
-void showScore(void);//Mostra a pontuaÁ„o dos jogadores que j· venceram o jogo;
-void solveGame(int *array);// Mostra uma dica para ajudar o ˙suario resolver o jogo;
+void help(void);//Passa as instru√ß√µes;
+void showScore(void);//Mostra a pontua√ß√£o dos jogadores que j√° venceram o jogo;
+void solveGame(int *array);// Mostra uma dica para ajudar o √∫suario resolver o jogo;
 
-//FunÁıes:
+//Fun√ß√µes:
 int main(void){
 	int op;
 //Menu:
@@ -67,7 +60,7 @@ void newGame(){
 	int *array = create();//Cria a matriz;
 	random(array);//Embaralha a matriz;
 
-	return game(array, 0);//ComeÁa o jogo;
+	return game(array, 0);//Come√ßa o jogo;
 }
 
 int *create(void){
@@ -147,7 +140,7 @@ void game(int *array, int count_move){
 		printf("Jogadas = %d  Ajuda: 77  Salvar: 88  Sair: 99", count_move);
 		print(array);//Mostra a matriz;
 		printf("Mover: ");
-		scanf("%d", &mov);//Qual peÁa o jogador quer mover;
+		scanf("%d", &mov);//Qual pe√ßa o jogador quer mover;
 		//99 salva o jogo;
 		if(mov == 88){
 			saveGame(array, count_move);
@@ -158,23 +151,23 @@ void game(int *array, int count_move){
 			break;
 		}
 
-		//111 da dica para o usu·rio;
+		//111 da dica para o usu√°rio;
 		if(mov == 77){
 			count_move += 30;
 			solveGame(array);
 			continue;
 		}
 
-		//N˙meros inv·lidos;
+		//N√∫meros inv√°lidos;
 		if( mov < 1 || mov > 15){
 			printf("\aMovimento Invalido! ");
 			continue;
 		}
-		//Chama a funÁıo para mover, se ela retornar -1, o movimento È inv·lido;
+		//Chama a fun√ß√µo para mover, se ela retornar -1, o movimento √© inv√°lido;
 		if (move (array, mov) == -1){
 			printf("\aMovimento Invalido! ");
 			continue;
-		}else{//Se n„o, a pessa È movida e o contador de jogadas aumenta;
+		}else{//Se n√£o, a pessa √© movida e o contador de jogadas aumenta;
 			count_move++;
 		}
 	}
@@ -213,13 +206,13 @@ void print(int *array){
 	int i;
 	puts("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n===== J O G O =====");
 	for(i = 0; i < 16; i++){
-		if (array[i] < 10) {//Se o n˙mero tiver um dÌgito;
+		if (array[i] < 10) {//Se o n√∫mero tiver um d√≠gito;
 			if(array[i] != 0){
 				printf("  %d  ", array[i]);
 			}else {
 					printf("     ", array[i]);
 			}
-		} else {//Se o n˙mero tiver 2 dÌgitos;
+		} else {//Se o n√∫mero tiver 2 d√≠gitos;
 			printf(" %d  ", array[i]);
 		}
 
@@ -242,18 +235,18 @@ int search(int *array, int x){
 
 int relativePosition(int a, int b){
 	if( a / 4 == b / 4 ){//Pertencem a mesma linha;
-		if ( a - b == 1 || b - a == 1 ){//Est„o a distancia de 1;
+		if ( a - b == 1 || b - a == 1 ){//Est√£o a distancia de 1;
 			return 1;
 		}else {
 			return 0;
 		}
 	} else if ( a % 4 == b % 4 ){//Pertencem a mesma coluna;
-		if ( a - 4  == b || a + 4 == b ){//Est„o a dist„ncia de 1;
+		if ( a - 4  == b || a + 4 == b ){//Est√£o a dist√£ncia de 1;
 			return 1;
 		} else{
 			return 0;
 		}
-	}else {//N„o est„o na mesma linha nem na mesma coluna;
+	}else {//N√£o est√£o na mesma linha nem na mesma coluna;
 		return 0;
 	}
 }
@@ -281,7 +274,7 @@ void saveScore(int count_move){
 		scanf("\n%[^\n]", winner.name);
 		winner.moves = count_move;
 
-		fscanf(scoreR, "%d", &num);//Quantas pessoas j· tem na lista;
+		fscanf(scoreR, "%d", &num);//Quantas pessoas j√° tem na lista;
 		if(num > 0 && feof(scoreR) == 0){
 			int i, j;
 			Player *scoreList = (Player *)malloc((num + 1) * sizeof(Player));//Cria um vetor para os vencedores;
@@ -293,7 +286,7 @@ void saveScore(int count_move){
 			strcpy(scoreList[num].name, winner.name);
 			scoreList[num].moves = winner.moves;
 
-			//OrdenaÁ„o do vetor;
+			//Ordena√ß√£o do vetor;
 			for(i = 0; i < num ; i++){
 				for(j = i + 1; j <= num; j++){
 					Player aux;
@@ -310,7 +303,7 @@ void saveScore(int count_move){
 				}
 			}
 
-			//Escreve o Score j· organizado, com o novo player no arquivo;
+			//Escreve o Score j√° organizado, com o novo player no arquivo;
 			FILE *scoreW = fopen("Gameof15Score.txt", "wt");
 			if(scoreW != NULL){
 				if(num >= 10) num = 9;
@@ -421,11 +414,11 @@ void solveGame(int *array){
 }
 
 void solve1(int *array){
-	while(array[0] != 1){//Arruma a posiÁ„o do 1;
+	while(array[0] != 1){//Arruma a posi√ß√£o do 1;
 		int p0 = search(array, 0), l0 = p0 / 4, c0 = p0 % 4;//Acha as coordenadas do 0;
 		int p1 = search(array, 1), l1 = p1 / 4, c1 = p1 % 4;//Acha as coordenadas do 1;
 //----------------------------------------------------------------------------//Arruma 1 na coluna;
-		while(c1 > 0){//Enquanto o 1 n„o estiver na Primeira Coluna (0);
+		while(c1 > 0){//Enquanto o 1 n√£o estiver na Primeira Coluna (0);
 			//Joga o 0 na primeira coluna;
 			while(c0 > 0){
 				left(array, &p0, &l0, &c0);
@@ -433,22 +426,22 @@ void solve1(int *array){
 			}
 
 			if (l0 < l1){//Quando 0 tiver em linhas a cima do 1;
-				while(l0 < l1) down(array, &p0, &l0, &c0);//Joga o 0 pra baixo atÈ ficar na linha do 1;
+				while(l0 < l1) down(array, &p0, &l0, &c0);//Joga o 0 pra baixo at√© ficar na linha do 1;
 
 			}else if (l0 == l1){//Se eles estiverm na mesma linha;
-				while(c0 < c1){//Traz o 1 para esquerda uma posiÁ„o;
+				while(c0 < c1){//Traz o 1 para esquerda uma posi√ß√£o;
 					right(array, &p0, &l0, &c0);
 					pos(array, &p1, &l1, &c1, 1);
 				}
 				(l1 < 3 ) ? down(array, &p0, &l0, &c0) : up(array, &p0, &l0, &c0);//Tira o 0 da linha do 1;
 
-			}else if(l0 > l1){//Se o 0 estiver abaixo do 1, joga o 0 pra cima atÈ ficar na mesma linha do 1;
+			}else if(l0 > l1){//Se o 0 estiver abaixo do 1, joga o 0 pra cima at√© ficar na mesma linha do 1;
 				while(l0 > l1) up(array, &p0, &l0, &c0);//Joga o 0 pra cima;
 			}
 			pos(array, &p1, &l1, &c1, 1);
 		}
 //--------------------------------------------------------------------//Arruma o 1 na primeira Linha;
-		while(l1 > 0){//Enquanto o 1 n„o estiver na Primeira linha;
+		while(l1 > 0){//Enquanto o 1 n√£o estiver na Primeira linha;
 			//Joga o 0 na primeira linha;
 			while(l0 > 0){
 				up(array, &p0, &l0, &c0);
@@ -457,7 +450,7 @@ void solve1(int *array){
 
 			while(c0 > 0) left(array, &p0, &l0, &c0);//Joga ele na coluna a cima do 1;
 
-			while(l0 < l1){//Traz o 1 para cima uma posiÁ„o;
+			while(l0 < l1){//Traz o 1 para cima uma posi√ß√£o;
 				down(array, &p0, &l0, &c0);
 				pos(array, &p1, &l1, &c1, 1);
 			}
@@ -467,13 +460,13 @@ void solve1(int *array){
 }
 
 void solve2(int *array){
-	while(array[1] != 2){//Arruma a posiÁ„o do 2;
+	while(array[1] != 2){//Arruma a posi√ß√£o do 2;
 		int p0 = search(array, 0), l0 = p0 / 4, c0 = p0 % 4;//Acha as coordenadas do 0;
 		int p2 = search(array, 2), l2 = p2 / 4, c2 = p2 % 4;//Acha as coordenadas do 2;
 //----------------------------------------------------------------------------//Colocando 2 na coluna certa;
-		while(c2 != 1){//Enquanto o 2 n„o estiver na Segunda Coluna;
+		while(c2 != 1){//Enquanto o 2 n√£o estiver na Segunda Coluna;
 			if(c2 == 0){//Se ele estiver na primeira coluna:
-				while(c0 < 3) right(array, &p0, &l0, &c0);//Joga o 0 na ˙ltima coluna;
+				while(c0 < 3) right(array, &p0, &l0, &c0);//Joga o 0 na √∫ltima coluna;
 
 				//Deixa o 0 na mesma linha que o 2;
 				if (l0 < l2){
@@ -482,7 +475,7 @@ void solve2(int *array){
 					while(l0 > l2) up(array, &p0, &l0, &c0);
 				}
 
-				while(c0 > c2){//Traz o 2 para direita uma posiÁ„o;
+				while(c0 > c2){//Traz o 2 para direita uma posi√ß√£o;
 					left(array, &p0, &l0, &c0);
 					pos(array, &p2, &l2, &c2, 2);
 				}
@@ -491,7 +484,7 @@ void solve2(int *array){
 
 			}else {
 				while(c2 > 1){
-					//Joga o 0 na coluna 1, e vai com ele atÈ a linha do 2. Depois vai para direita para atÈ fazer o 2 mexer uma posiÁ„o;
+					//Joga o 0 na coluna 1, e vai com ele at√© a linha do 2. Depois vai para direita para at√© fazer o 2 mexer uma posi√ß√£o;
 					if(c0 > 1){
 						while(c0 > 1) left(array, &p0, &l0, &c0);
 					}else right(array, &p0, &l0, &c0);
@@ -503,7 +496,7 @@ void solve2(int *array){
 						while(l0 > l2) up(array, &p0, &l0, &c0);
 					}
 
-					while(c0 < c2){//Traz o 2 para esquerda uma posiÁ„o;
+					while(c0 < c2){//Traz o 2 para esquerda uma posi√ß√£o;
 						right(array, &p0, &l0, &c0);
 						pos(array, &p2, &l2, &c2, 2);
 					}
@@ -515,8 +508,8 @@ void solve2(int *array){
 			pos(array, &p2, &l2, &c2, 2);
 		}
 //--------------------------------------------------------------------//Arrumando 2 na linha certa
-		while(l2 > 0){//Enquanto o 2 n„o estiver na Primeira linha;
-			//Joga o 0 na ˙ltima coluna;
+		while(l2 > 0){//Enquanto o 2 n√£o estiver na Primeira linha;
+			//Joga o 0 na √∫ltima coluna;
 			while(c0 < 3){
 				right(array, &p0, &l0, &c0);
 				pos(array, &p2, &l2, &c2, 2);
@@ -526,7 +519,7 @@ void solve2(int *array){
 
 			while(c0 > c2) left(array, &p0, &l0, &c0);//Quando 0 tiver na linha 0, joga ele pra mesma coluna que o 2;
 
-			while(l0 < l2){//Quando 0 tiver na mesma coluna que o 2, joga ele pra baixo atÈ o 2 subir;
+			while(l0 < l2){//Quando 0 tiver na mesma coluna que o 2, joga ele pra baixo at√© o 2 subir;
 				down(array, &p0, &l0, &c0);
 				pos(array, &p2, &l2, &c2, 2);
 			}
@@ -559,7 +552,7 @@ void solve3e4(int *array){
 			}else if(l0 > l4){
 				while(l0 > l4) up(array, &p0, &l0, &c0);
 			}
-			//Traz o 4 uma posiÁ„o;
+			//Traz o 4 uma posi√ß√£o;
 			if(c0 > c4){
 				while(c0 > c4){
 					left(array, &p0, &l0, &c0);
@@ -573,10 +566,10 @@ void solve3e4(int *array){
 			pos(array, &p4, &l4, &c4, 4);
 		}
 //---------------------------------------------------------------------------------//Arruma 4 na linha;
-		while(l4 > 0){//Enquanto o 4 n„o estiver na Primeira linha;
+		while(l4 > 0){//Enquanto o 4 n√£o estiver na Primeira linha;
 			//Tira o 0 da linha do 4;
 			if(l0 == l4) (l0 < 3 ) ? down(array, &p0, &l0, &c0) : up(array, &p0, &l0, &c0);
-			//Joga o 0 na ˙ltima coluna;
+			//Joga o 0 na √∫ltima coluna;
 			while(c0 < 3) right(array, &p0, &l0, &c0);
 
 			while(l0 > 0) up(array, &p0, &l0, &c0);//Quando 0 tiver na coluna 3, joga ele pra linha 0;
@@ -586,7 +579,7 @@ void solve3e4(int *array){
 				pos(array, &p4, &l4, &c4, 4);
 			}
 
-			while(l0 < l4){//Quando 0 tiver na mesma coluna que o 2, joga ele pra baixo atÈ o 2 subir;
+			while(l0 < l4){//Quando 0 tiver na mesma coluna que o 2, joga ele pra baixo at√© o 2 subir;
 				down(array, &p0, &l0, &c0);
 				pos(array, &p4, &l4, &c4, 4);
 			}
@@ -619,7 +612,7 @@ void solve3e4(int *array){
 				}else if(l0 > l3){
 					while(l0 > l3) up(array, &p0, &l0, &c0);
 				}
-				//Traz o 3 uma posiÁ„o;
+				//Traz o 3 uma posi√ß√£o;
 				if(c0 > c3){
 					while(c0 > c3){
 						left(array, &p0, &l0, &c0);
@@ -639,11 +632,11 @@ void solve3e4(int *array){
 			//Da 2 voltas ;
 			up(array, &p0, &l0, &c0);left(array, &p0, &l0, &c0);down(array, &p0, &l0, &c0);down(array, &p0, &l0, &c0);right(array, &p0, &l0, &c0);up(array, &p0, &l0, &c0);
 			up(array, &p0, &l0, &c0);left(array, &p0, &l0, &c0);down(array, &p0, &l0, &c0);down(array, &p0, &l0, &c0);right(array, &p0, &l0, &c0);up(array, &p0, &l0, &c0);
-			//Tira o 3 do cÌrculo;
+			//Tira o 3 do c√≠rculo;
 			up(array, &p0, &l0, &c0);left(array, &p0, &l0, &c0);down(array, &p0, &l0, &c0);left(array, &p0, &l0, &c0);down(array, &p0, &l0, &c0);right(array, &p0, &l0, &c0);
 			//Deixa o 3 em baixo do 4;
 			right(array, &p0, &l0, &c0);up(array, &p0, &l0, &c0);up(array, &p0, &l0, &c0);left(array, &p0, &l0, &c0);down(array, &p0, &l0, &c0);down(array, &p0, &l0, &c0);left(array, &p0, &l0, &c0);
-			//Deixa o 4 e o 3 na posiÁ„o desejada para continuar;
+			//Deixa o 4 e o 3 na posi√ß√£o desejada para continuar;
 			while(l0 < 3) down(array, &p0, &l0, &c0);
 			while(c0 < 3) right(array, &p0, &l0, &c0);
 			while(l0 > 0) up(array, &p0, &l0, &c0);
@@ -652,23 +645,23 @@ void solve3e4(int *array){
 			pos(array, &p4, &l4, &c4, 4);
 		}
 //----------------------------------------------------------------------------------//Arruma 3 na linha certa;
-		while(l3 > 1){//Enquanto o 3 n„o estiver na Segunda linha;
+		while(l3 > 1){//Enquanto o 3 n√£o estiver na Segunda linha;
 			//Tira o 0 da linha do 3;
 			if(l0 == l3) (l0 < 3 ) ? down(array, &p0, &l0, &c0) : up(array, &p0, &l0, &c0);
-			//Joga o 0 na ˙ltima coluna;
+			//Joga o 0 na √∫ltima coluna;
 			while(c0 < 3) right(array, &p0, &l0, &c0);
 
 			while(l0 > 1) up(array, &p0, &l0, &c0);//Quando 0 tiver na coluna 3, joga ele pra linha 1;
 
 			while(c0 > c3) left(array, &p0, &l0, &c0);//Quando 0 tiver na linha 1, joga ele pra mesma coluna que o 3;
 
-			while(l0 < l3){//Quando 0 tiver na mesma coluna que o 2, joga ele pra baixo atÈ o 2 subir;
+			while(l0 < l3){//Quando 0 tiver na mesma coluna que o 2, joga ele pra baixo at√© o 2 subir;
 				down(array, &p0, &l0, &c0);
 				pos(array, &p3, &l3, &c3, 3);
 			}
 		}
 //-------------------------------------------------------------------------------//Arruma tudo
-		//Joga o zero na -ultima linha e depois na˙ltima coluna. Depois sobe ele atÈ a primeira linha;
+		//Joga o zero na -ultima linha e depois na√∫ltima coluna. Depois sobe ele at√© a primeira linha;
 		while(l0 < 3) down(array, &p0, &l0, &c0);
 		while(c0 < 3) right(array, &p0, &l0, &c0);
 		while(l0 > 0) up(array, &p0, &l0, &c0);
@@ -678,11 +671,11 @@ void solve3e4(int *array){
 }
 
 void solve5(int *array){
-	while(array[4] != 5){//Arruma a posiÁ„o do 5;
+	while(array[4] != 5){//Arruma a posi√ß√£o do 5;
 		int p0 = search(array, 0), l0 = p0 / 4, c0 = p0 % 4;//Acha as coordenadas do 0;
 		int p5 = search(array, 5), l5 = p5 / 4, c5 = p5 % 4;//Acha as coordenadas do 1;
 //----------------------------------------------------------------------------//Arruma 1 na coluna;
-		while(c5 > 0){//Enquanto o 5 n„o estiver na Primeira Coluna (0);
+		while(c5 > 0){//Enquanto o 5 n√£o estiver na Primeira Coluna (0);
 			//Joga o 0 na primeira coluna;
 			while(c0 > 0){
 				left(array, &p0, &l0, &c0);
@@ -693,18 +686,18 @@ void solve5(int *array){
 				while(l0 < l5) down(array, &p0, &l0, &c0);
 
 			}else if (l0 == l5){//Se eles estiverm na mesma linha;
-				while(c0 < c5){//Traz o 5 para esquerda uma posiÁ„o;
+				while(c0 < c5){//Traz o 5 para esquerda uma posi√ß√£o;
 					right(array, &p0, &l0, &c0);
 					pos(array, &p5, &l5, &c5, 5);
 				}
 				(l0 < 3 ) ? down(array, &p0, &l0, &c0) : up(array, &p0, &l0, &c0);
 
-			}else if(l0 > l5){//Se o 0 estiver abaixo do 5, joga o 0 pra cima atÈ ficar na mesma linha do 5;
+			}else if(l0 > l5){//Se o 0 estiver abaixo do 5, joga o 0 pra cima at√© ficar na mesma linha do 5;
 				while(l0 > l5) up(array, &p0, &l0, &c0);//Joga o 0 pra cima;
 			}
 		}
 //--------------------------------------------------------------------//Arruma o 1 na primeira Linha;
-		while(l5 > 1){//Enquanto o 5 n„o estiver na Segunda linha;
+		while(l5 > 1){//Enquanto o 5 n√£o estiver na Segunda linha;
 			//Joga o 0 na Segunda linha;
 			while(l0 > 1){
 				up(array, &p0, &l0, &c0);
@@ -713,7 +706,7 @@ void solve5(int *array){
 
 			while(c0 > 0) left(array, &p0, &l0, &c0);//Joga ele na coluna a cima do 1;
 
-			while(l0 < l5){//Traz o 1 para cima uma posiÁ„o;
+			while(l0 < l5){//Traz o 1 para cima uma posi√ß√£o;
 				down(array, &p0, &l0, &c0);
 				pos(array, &p5, &l5, &c5, 5);
 			}
@@ -760,7 +753,7 @@ void solve9e13(int *array){
 
 			while(c0 > 0) left(array, &p0, &l0, &c0);//0 na primeira coluna;
 
-			up(array, &p0, &l0, &c0);//Se o 0 estiver abaixo do 13, joga o 0 pra cima atÈ ficar na mesma linha do 13;
+			up(array, &p0, &l0, &c0);//Se o 0 estiver abaixo do 13, joga o 0 pra cima at√© ficar na mesma linha do 13;
 
 			while(c0 < c13){
 				right(array, &p0, &l0, &c0);
@@ -807,7 +800,7 @@ void solve9e13(int *array){
 			//Da duas voltas;
 			left(array, &p0, &l0, &c0);up(array, &p0, &l0, &c0);right(array, &p0, &l0, &c0);right(array, &p0, &l0, &c0);down(array, &p0, &l0, &c0);left(array, &p0, &l0, &c0);
 			left(array, &p0, &l0, &c0);up(array, &p0, &l0, &c0);right(array, &p0, &l0, &c0);right(array, &p0, &l0, &c0);down(array, &p0, &l0, &c0);left(array, &p0, &l0, &c0);
-			//Tira o 9 do cÌrculo
+			//Tira o 9 do c√≠rculo
 			left(array, &p0, &l0, &c0);up(array, &p0, &l0, &c0);right(array, &p0, &l0, &c0);up(array, &p0, &l0, &c0);right(array, &p0, &l0, &c0);down(array, &p0, &l0, &c0);
 			//Deixa 9 a direita do 13;
 			down(array, &p0, &l0, &c0);left(array, &p0, &l0, &c0);left(array, &p0, &l0, &c0);up(array, &p0, &l0, &c0);right(array, &p0, &l0, &c0);right(array, &p0, &l0, &c0);up(array, &p0, &l0, &c0);
@@ -824,9 +817,9 @@ void solve9e13(int *array){
 				pos(array, &p9, &l9, &c9, 9);
 			}
 			//Deixa ele na mesma linha que o 9;
-			if (l0 < l9) down(array, &p0, &l0, &c0);//Quando 0 tiver em linhas a cima do 13, Joga o 0 pra baixo atÈ ficar na linha do 13;
-			else if(l0 > l9) up(array, &p0, &l0, &c0);//Se o 0 estiver abaixo do 1, joga o 0 pra cima atÈ ficar na mesma linha do 1;
-			// Tras o 9 uma posiÁ„o;
+			if (l0 < l9) down(array, &p0, &l0, &c0);//Quando 0 tiver em linhas a cima do 13, Joga o 0 pra baixo at√© ficar na linha do 13;
+			else if(l0 > l9) up(array, &p0, &l0, &c0);//Se o 0 estiver abaixo do 1, joga o 0 pra cima at√© ficar na mesma linha do 1;
+			// Tras o 9 uma posi√ß√£o;
 			while(c0 < c9) right(array, &p0, &l0, &c0);
 			down(array, &p0, &l0, &c0);
 		}
@@ -839,11 +832,11 @@ void solve9e13(int *array){
 }
 
 void solve6(int *array){
-	while(array[5] != 6){//Arruma a posiÁ„o do 1;
+	while(array[5] != 6){//Arruma a posi√ß√£o do 1;
 		int p0 = search(array, 0), l0 = p0 / 4, c0 = p0 % 4;//Acha as coordenadas do 0;
 		int p6 = search(array, 6), l6 = p6 / 4, c6 = p6 % 4;//Acha as coordenadas do 1;
 //----------------------------------------------------------------------------//Arruma 1 na coluna;
-		while(c6 > 1){//Enquanto o 1 n„o estiver na Segunda Coluna (1);
+		while(c6 > 1){//Enquanto o 1 n√£o estiver na Segunda Coluna (1);
 			//Joga o 0 na segunda coluna;
 			while(c0 > 1){
 				left(array, &p0, &l0, &c0);
@@ -851,21 +844,21 @@ void solve6(int *array){
 			}
 
 			if (l0 < l6){//Quando 0 tiver em linhas a cima do 6;
-				while(l0 < l6) down(array, &p0, &l0, &c0);//Joga o 0 pra baixo atÈ ficar na linha do 1;
+				while(l0 < l6) down(array, &p0, &l0, &c0);//Joga o 0 pra baixo at√© ficar na linha do 1;
 
 			}else if (l0 == l6){//Se eles estiverm na mesma linha;
-				while(c0 < c6){//Traz o 1 para esquerda uma posiÁ„o;
+				while(c0 < c6){//Traz o 1 para esquerda uma posi√ß√£o;
 					right(array, &p0, &l0, &c0);
 					pos(array, &p6, &l6, &c6, 6);
 				}
 				(l0 < 3 ) ? down(array, &p0, &l0, &c0) : up(array, &p0, &l0, &c0);//Tira o 0 da linha do 1;
 
-			}else if(l0 > l6){//Se o 0 estiver abaixo do 6, joga o 0 pra cima atÈ ficar na mesma linha do 1;
+			}else if(l0 > l6){//Se o 0 estiver abaixo do 6, joga o 0 pra cima at√© ficar na mesma linha do 1;
 				while(l0 > l6) up(array, &p0, &l0, &c0);//Joga o 0 pra cima;
 			}
 		}
 //--------------------------------------------------------------------//Arruma o 1 na primeira Linha;
-		while(l6 > 1){//Enquanto o 6 n„o estiver na Segunda linha;
+		while(l6 > 1){//Enquanto o 6 n√£o estiver na Segunda linha;
 			//Joga o 0 na Segunda linha;
 			while(l0 > 1){
 				up(array, &p0, &l0, &c0);
@@ -874,7 +867,7 @@ void solve6(int *array){
 
 			while(c0 > 1) left(array, &p0, &l0, &c0);//Joga ele na coluna a cima do 1;
 
-			while(l0 < l6){//Traz o 1 para cima uma posiÁ„o;
+			while(l0 < l6){//Traz o 1 para cima uma posi√ß√£o;
 				down(array, &p0, &l0, &c0);
 				pos(array, &p6, &l6, &c6, 6);
 			}
@@ -906,7 +899,7 @@ void solve7e8(int *array){
 			}else if(l0 > l8){
 				while(l0 > l8) up(array, &p0, &l0, &c0);
 			}
-			//Traz o 8 uma posiÁ„o;
+			//Traz o 8 uma posi√ß√£o;
 			if(c0 > c8){
 				while(c0 > c8){
 					left(array, &p0, &l0, &c0);
@@ -919,10 +912,10 @@ void solve7e8(int *array){
 			(l0 < 3 ) ? down(array, &p0, &l0, &c0) : up(array, &p0, &l0, &c0);//Tira o 0 da linha do 8;
 		}
 //---------------------------------------------------------------------------------//Arruma 8 na linha;
-		while(l8 > 1){//Enquanto o 8 n„o estiver na segunda linha;
+		while(l8 > 1){//Enquanto o 8 n√£o estiver na segunda linha;
 			//Tira o 0 da linha do 8;
 			if(l0 == l8) (l0 < 3 ) ? down(array, &p0, &l0, &c0) : up(array, &p0, &l0, &c0);
-			//Joga o 0 na ˙ltima coluna;
+			//Joga o 0 na √∫ltima coluna;
 			while(c0 < 3) right(array, &p0, &l0, &c0);
 
 			while(l0 > 1) up(array, &p0, &l0, &c0);//Quando 0 tiver na coluna 3, joga ele pra linha 1;
@@ -931,7 +924,7 @@ void solve7e8(int *array){
 				left(array, &p0, &l0, &c0);
 			}
 
-			while(l0 < l8){//Quando 0 tiver na mesma coluna que o 8, joga ele pra baixo atÈ o 8 subir;
+			while(l0 < l8){//Quando 0 tiver na mesma coluna que o 8, joga ele pra baixo at√© o 8 subir;
 				down(array, &p0, &l0, &c0);
 				pos(array, &p8, &l8, &c8, 8);
 			}
@@ -954,7 +947,7 @@ void solve7e8(int *array){
                 //Da 2 voltas ;
                 up(array, &p0, &l0, &c0);left(array, &p0, &l0, &c0);down(array, &p0, &l0, &c0);down(array, &p0, &l0, &c0);right(array, &p0, &l0, &c0);up(array, &p0, &l0, &c0);
                 up(array, &p0, &l0, &c0);left(array, &p0, &l0, &c0);down(array, &p0, &l0, &c0);down(array, &p0, &l0, &c0);right(array, &p0, &l0, &c0);up(array, &p0, &l0, &c0);
-                //Tira o 7 do cÌrculo;
+                //Tira o 7 do c√≠rculo;
                 up(array, &p0, &l0, &c0);left(array, &p0, &l0, &c0);down(array, &p0, &l0, &c0);left(array, &p0, &l0, &c0);down(array, &p0, &l0, &c0);right(array, &p0, &l0, &c0);
                 //Deixa o 8 em seu lugar e o 7 na coluna certa;
                 right(array, &p0, &l0, &c0);up(array, &p0, &l0, &c0);up(array, &p0, &l0, &c0);left(array, &p0, &l0, &c0);down(array, &p0, &l0, &c0);down(array, &p0, &l0, &c0);
@@ -973,7 +966,7 @@ void solve7e8(int *array){
         }
 
 //-------------------------------------------------------------------------------//Arruma tudo
-		//Joga o zero na ultima linha e depois na˙ltima coluna. Depois sobe ele atÈ a Segunda linha;
+		//Joga o zero na ultima linha e depois na√∫ltima coluna. Depois sobe ele at√© a Segunda linha;
 		while(l0 < 3) down(array, &p0, &l0, &c0);
 		while(c0 < 3) right(array, &p0, &l0, &c0);
 		while(l0 > 1) up(array, &p0, &l0, &c0);
@@ -1003,7 +996,7 @@ void solve10e14(int *array){
 		while(c14 > 1){
 			while(l0 < 3) down(array, &p0, &l0, &c0);//Tira o zero da linha do 14;
 			while(c0 > 1) left(array, &p0, &l0, &c0);//0 na Segunda coluna;
-			up(array, &p0, &l0, &c0);//Joga o 0 pra cima atÈ ficar na mesma linha do 14;
+			up(array, &p0, &l0, &c0);//Joga o 0 pra cima at√© ficar na mesma linha do 14;
 			while(c0 < c14){
 				right(array, &p0, &l0, &c0);
 				pos(array, &p14, &l14, &c14, 14);
@@ -1028,7 +1021,7 @@ void solve10e14(int *array){
                 //Da uma volta e meia;
                 left(array, &p0, &l0, &c0);up(array, &p0, &l0, &c0);right(array, &p0, &l0, &c0);right(array, &p0, &l0, &c0);down(array, &p0, &l0, &c0);left(array, &p0, &l0, &c0);
                 left(array, &p0, &l0, &c0);up(array, &p0, &l0, &c0);right(array, &p0, &l0, &c0);down(array, &p0, &l0, &c0);
-                //Volta o 14 para sua posiÁ„o
+                //Volta o 14 para sua posi√ß√£o
                 left(array, &p0, &l0, &c0);up(array, &p0, &l0, &c0);right(array, &p0, &l0, &c0);
             }
             pos(array, &p10, &l10, &c10, 10);
